@@ -71,7 +71,7 @@ const events = [
     { time: 1148, location: 'Hall 1 (Downstairs)', note: 'Don\'t trap at 19:07 - Wait for second capture opportunity at 19:08, also game over if you miss' },
     { time: 1161, location: 'Living Room', note: '' },
     { time: 1196, location: 'Entryway', note: 'Tony' },
-    { time: 1215, location: 'Living Room', note: 'This one is really inconsistent for me' },
+    { time: 1215, location: 'Living Room', note: '' },
     { time: 1280, location: 'Bedroom', note: '' },
     { time: 1292, location: 'Driveway', note: '' },
     { time: 1306, location: 'Kitchen', note: '' },
@@ -139,7 +139,7 @@ const NightTrapAssistant = () => {
                     
                     // Announce next location immediately after current event time passes
                     if (nextEventToSet) {
-                        const nextUtterance = new SpeechSynthesisUtterance(`Go to ${nextEventToSet.location} at ${Math.floor(nextEventToSet.time / 60)}:${(nextEventToSet.time % 60).toString().padStart(2, '0')}. ${nextEventToSet.note}`);
+                        const nextUtterance = new SpeechSynthesisUtterance(`${nextEventToSet.location} at ${Math.floor(nextEventToSet.time / 60)}:${(nextEventToSet.time % 60).toString().padStart(2, '0')}. ${nextEventToSet.note}`);
                         if (selectedVoice) nextUtterance.voice = selectedVoice;
                         speechSynthesis.speak(nextUtterance);
                     }

@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# 🏚️ Night Trap Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> *Your ultimate companion for mastering the classic 1992 horror game Night Trap*
 
-## Available Scripts
+A real-time assistant that provides precise timing and location guidance to help you achieve the perfect Night Trap playthrough. Never miss another Auger capture again!
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- **⏰ Precision Timer** - Synchronized countdown with visual and audio cues
+- **🎯 Location Guidance** - Shows exactly where to go and when
+- **🔊 Voice Announcements** - Customizable speech synthesis with multiple voice options
+- **⏸️ Pause & Resume** - Full control over timing with manual adjustments
+- **🎮 Game-Critical Notes** - Important warnings for code changes and critical captures
+- **🌙 Horror Theme** - Atmospheric dark interface matching the game's aesthetic
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Quick Start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+# Clone the repository
+git clone https://github.com/matt404/nighttrapper.git
+cd nighttrapper
 
-### `npm test`
+# Install dependencies
+npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Start the development server
+npm start
+```
 
-### `npm run build`
+Open [http://localhost:3000](http://localhost:3000) and start your Night Trap session!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🎮 How to Use
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Start the Timer** - Click the ▶️ Start button to begin the sequence
+2. **Follow Instructions** - Listen for voice announcements and watch the display
+3. **Pause if Needed** - Use ⏸️ Pause to stop timing during gameplay interruptions
+4. **Adjust Timing** - Fine-tune the timer with +/- buttons when paused
+5. **Change Voice** - Select your preferred speech voice from the dropdown
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🎯 Game Strategy
 
-### `npm run eject`
+The assistant tracks all 75+ critical moments in Night Trap, including:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Auger Captures** - Precise timing for each location
+- **Code Changes** - Warnings for when to change security codes
+- **Critical Moments** - Game over scenarios and checkpoints
+- **Perfect Game Tips** - Bonus captures for completionists
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠️ Technology Stack
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **React** - Modern UI framework
+- **React Bootstrap** - Responsive styling components
+- **Web Speech API** - Cross-platform voice synthesis
+- **CSS3** - Custom horror-themed styling with gradients and shadows
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🎨 Theme
 
-## Learn More
+The interface features a chilling dark theme with:
+- Deep black gradient backgrounds with subtle red undertones
+- Glowing text effects and atmospheric lighting
+- Horror-themed icons and visual elements
+- Responsive design that works on all devices
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📱 Deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Development
+```bash
+npm start
+```
 
-### Code Splitting
+### Production Build
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Docker Deployment
+```bash
+# Build and push (ARM64)
+./.cicd/docker-publish.sh
 
-### Analyzing the Bundle Size
+# Deploy to Kubernetes
+./.cicd/k8s-deploy.sh
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🎮 About Night Trap
 
-### Making a Progressive Web App
+Night Trap is a 1992 interactive movie video game that became infamous for its controversial content and later became a cult classic. This assistant helps players navigate the complex timing required to successfully capture all the Augers and achieve the perfect ending.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🤝 Contributing
 
-### Advanced Configuration
+Contributions are welcome! Feel free to:
+- Report bugs or suggest features
+- Improve the timing data
+- Enhance the UI/UX
+- Add new voice options
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📄 License
 
-### Deployment
+This project is open source and available under the MIT License.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*"It's a trap!" - Make sure you're ready for every one of them.* 🕷️
