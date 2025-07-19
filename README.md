@@ -17,8 +17,8 @@ A real-time assistant that provides precise timing and location guidance to help
 
 ```bash
 # Clone the repository
-git clone https://github.com/matt404/nighttrapper.git
-cd nighttrapper
+git clone https://github.com/matt404/night-trap-assistant.git
+cd night-trap-assistant
 
 # Install dependencies
 npm install
