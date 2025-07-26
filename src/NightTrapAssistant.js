@@ -91,6 +91,7 @@ const NightTrapAssistant = () => {
     const intervalRef = useRef(null);
     const startTimeRef = useRef(null);
     const eventIndexRef = useRef(0);
+    const timelineRef = useRef(null);
 
     useEffect(() => {
         const loadVoices = () => {
@@ -137,6 +138,14 @@ const NightTrapAssistant = () => {
                     const nextEventToSet = events[eventIndexRef.current] || null;
                     setNextEvent(nextEventToSet);
                     
+                    // Scroll to active item
+                    if (timelineRef.current) {
+                        const activeElement = timelineRef.current.children[eventIndexRef.current];
+                        if (activeElement) {
+                            activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                    
                     // Announce next location immediately after current event time passes
                     if (nextEventToSet) {
                         const nextUtterance = new SpeechSynthesisUtterance(`${nextEventToSet.location} at ${Math.floor(nextEventToSet.time / 60)}:${(nextEventToSet.time % 60).toString().padStart(2, '0')}. ${nextEventToSet.note}`);
@@ -174,6 +183,14 @@ const NightTrapAssistant = () => {
             }
             eventIndexRef.current = newIndex;
             setNextEvent(events[newIndex] || null);
+            
+            // Scroll to active item when timer is adjusted
+            if (timelineRef.current) {
+                const activeElement = timelineRef.current.children[newIndex];
+                if (activeElement) {
+                    activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
         }
     };
 
@@ -194,7 +211,9 @@ const NightTrapAssistant = () => {
                 backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.02"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
                 opacity: 0.3
             }}></div>
-            <Container fluid className="d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh', position: 'relative', zIndex: 1 }}>
+            <Container fluid style={{ minHeight: '100vh', position: 'relative', zIndex: 1 }}>
+                <Row style={{ minHeight: '100vh' }}>
+                    <Col md={8} className="d-flex flex-column justify-content-center align-items-center">
                 <Row className="mb-5">
                     <Col className="text-center">
                         <div>
@@ -332,49 +351,109 @@ const NightTrapAssistant = () => {
                     </Col>
                 </Row>
 
-                <Row>
-                    <Col className="text-center">
-                        {nextEvent ? (
-                            <div style={{
-                                border: '3px solid #ff6b6b',
-                                borderRadius: '20px',
-                                padding: '2rem',
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                maxWidth: '800px',
-                                margin: '0 auto'
-                            }}>
-                                <p style={{ 
-                                    fontSize: '2rem', 
-                                    color: '#ffc107',
-                                    marginBottom: '1rem'
-                                }}>Next Location:</p>
-                                <p style={{ 
-                                    fontSize: '4rem', 
-                                    fontWeight: 'bold', 
-                                    color: '#ff6b6b',
-                                    marginBottom: '1rem'
-                                }}>🏠 {nextEvent.location}</p>
-                                {nextEvent.note && (
-                                    <p style={{ 
-                                        fontSize: '1.5rem', 
-                                        fontStyle: 'italic', 
-                                        color: '#ff9999',
-                                        marginTop: '1rem',
-                                        padding: '1rem',
-                                        backgroundColor: 'rgba(255, 0, 0, 0.1)',
-                                        borderRadius: '10px',
-                                        border: '1px solid rgba(255, 107, 107, 0.3)'
+                        <Row>
+                            <Col className="text-center">
+                                {nextEvent ? (
+                                    <div style={{
+                                        border: '3px solid #ff6b6b',
+                                        borderRadius: '20px',
+                                        padding: '2rem',
+                                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                        maxWidth: '600px',
+                                        margin: '0 auto'
                                     }}>
-                                        ⚠️ Note: {nextEvent.note}
-                                    </p>
+                                        <p style={{ 
+                                            fontSize: '2rem', 
+                                            color: '#ffc107',
+                                            marginBottom: '1rem'
+                                        }}>Next Location:</p>
+                                        <p style={{ 
+                                            fontSize: '3rem', 
+                                            fontWeight: 'bold', 
+                                            color: '#ff6b6b',
+                                            marginBottom: '1rem'
+                                        }}>🏠 {nextEvent.location}</p>
+                                        {nextEvent.note && (
+                                            <p style={{ 
+                                                fontSize: '1.2rem', 
+                                                fontStyle: 'italic', 
+                                                color: '#ff9999',
+                                                marginTop: '1rem',
+                                                padding: '1rem',
+                                                backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                                                borderRadius: '10px',
+                                                border: '1px solid rgba(255, 107, 107, 0.3)'
+                                            }}>
+                                                ⚠️ Note: {nextEvent.note}
+                                            </p>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div style={{
+                                        fontSize: '3rem',
+                                        color: '#4caf50',
+                                    }}>✅ All events completed!</div>
                                 )}
-                            </div>
-                        ) : (
-                            <div style={{
-                                fontSize: '3rem',
-                                color: '#4caf50',
-                            }}>✅ All events completed!</div>
-                        )}
+                            </Col>
+                        </Row>
+                    </Col>
+                    
+                    <Col md={4} style={{
+                        borderLeft: '2px solid #ff6b6b',
+                        padding: '2rem',
+                        maxHeight: '100vh',
+                        overflowY: 'auto'
+                    }}>
+                        <h3 style={{
+                            color: '#ff6b6b',
+                            textAlign: 'center',
+                            marginBottom: '2rem'
+                        }}>📋 Event Timeline ({Math.round((eventIndexRef.current / events.length) * 100)}%)</h3>
+                        
+                        <div ref={timelineRef} style={{ fontSize: '0.9rem' }}>
+                            {events.map((event, index) => {
+                                const isCompleted = index < eventIndexRef.current;
+                                const isNext = index === eventIndexRef.current;
+                                
+                                return (
+                                    <div key={index} style={{
+                                        padding: '0.5rem',
+                                        marginBottom: '0.5rem',
+                                        borderRadius: '8px',
+                                        border: isNext ? '2px solid #ffc107' : '1px solid rgba(255, 107, 107, 0.3)',
+                                        backgroundColor: isCompleted ? 'rgba(100, 100, 100, 0.3)' : 
+                                                        isNext ? 'rgba(255, 193, 7, 0.2)' : 
+                                                        'rgba(0, 0, 0, 0.5)',
+                                        color: isCompleted ? '#888' : 
+                                               isNext ? '#ffc107' : '#fff'
+                                    }}>
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            marginBottom: '0.2rem'
+                                        }}>
+                                            <span style={{ fontWeight: 'bold' }}>
+                                                {isCompleted ? '✅' : isNext ? '⏰' : '⏳'} {formatTime(event.time)}
+                                            </span>
+                                        </div>
+                                        <div style={{ fontSize: '0.85rem' }}>
+                                            {event.location || 'Checkpoint'}
+                                        </div>
+                                        {event.note && (
+                                            <div style={{ 
+                                                fontSize: '0.75rem', 
+                                                fontStyle: 'italic',
+                                                marginTop: '0.2rem',
+                                                opacity: isCompleted ? 0.6 : 1
+                                            }}>
+                                                {event.note}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </Col>
                 </Row>
             </Container>
